@@ -1,2 +1,2 @@
 # opencv-python
-Curso introducción a OpenCV y Python
+Curso de introducción a OpenCV y Python
