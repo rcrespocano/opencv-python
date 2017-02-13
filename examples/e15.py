@@ -1,19 +1,24 @@
 import cv2
 import sys
 
-cascPath = sys.argv[1]
-faceCascade = cv2.CascadeClassifier(cascPath)
+# Load XML classifieres
+cas_path = 'haarcascade_frontalface_default.xml'
+face_cascade = cv2.CascadeClassifier(cas_path)
 
-video_capture = cv2.VideoCapture(0)
+# Webcam
+webcam_id = 0
+video_capture = cv2.VideoCapture(webcam_id)
 
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # Gray image
+    gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    faces = faceCascade.detectMultiScale(
-        gray,
+    # Detect faces
+    faces = face_cascade.detectMultiScale(
+        gray_image,
         scaleFactor=1.1,
         minNeighbors=5,
         minSize=(30, 30),
