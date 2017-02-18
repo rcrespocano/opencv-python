@@ -1,22 +1,35 @@
 import cv2
 import numpy as np
 
-filename = 'images/church.png'
-img = cv2.imread(filename)
+# Webcam
+webcam_id = 0
+cap = cv2.VideoCapture(webcam_id)
 
-# RGB -> Grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+while True:
+    _, frame = cap.read()
 
-# Input image should be grayscale and float32 type
-gray = np.float32(gray)
+    # Convert BGR to HSV
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-# Corner detection
-dst = cv2.cornerHarris(gray, blockSize=2, ksize=3, k=0.04)
+    # Define range in HSV
+    lower_color = np.array([85, 50, 50])
+    upper_color =  np.array([145, 255, 255])
 
-# Show
-cv2.imshow('dst',img)
+    # Mask: threshold the HSV image to get only defined colors
+    mask = cv2.inRange(hsv, lower_color, upper_color)
 
-# Exit?
-if cv2.waitKey(0) & 0xFF == ord('q'):
-    cv2.destroyAllWindows()
+    # Bitwise-AND mask and original image
+    res = cv2.bitwise_and(frame, frame, mask=mask)
+
+    # Show
+    cv2.imshow('Frame', frame)
+    cv2.imshow('Mask', mask)
+    cv2.imshow('Color', res)
+
+    # Exit?
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
+cap.release()
 

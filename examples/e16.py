@@ -3,9 +3,7 @@ import sys
 
 # Load XML classifieres
 cas_path = 'haarcascade_frontalface_default.xml'
-eye_path = 'haarcascade_eye.xml'
 face_cascade = cv2.CascadeClassifier(cas_path)
-eye_cascade = cv2.CascadeClassifier(eye_path)
 
 # Webcam
 webcam_id = 0
@@ -29,16 +27,7 @@ while True:
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 2)
-        
-        # Detect eyes
-        roi_gray = frame[y:y+h, x:x+w]
-        roi_color = frame[y:y+h, x:x+w]
-        eyes = eye_cascade.detectMultiScale(roi_gray)
-    
-        # Draw a rectangle around the eyes
-        for (ex,ey,ew,eh) in eyes:
-            cv2.rectangle(roi_color, (ex,ey), (ex+ew,ey+eh), (0,255,0), 2)
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)

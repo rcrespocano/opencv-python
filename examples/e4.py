@@ -1,22 +1,31 @@
 import numpy as np
 import cv2
 
-webcam_id = 0
-cap = cv2.VideoCapture(webcam_id)
+video_file = 'videos/roller-coaster.mp4'
+cap = cv2.VideoCapture(video_file)
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 1
+color = (255,255,255)
+thickness = 1
 
 while(cap.isOpened()):
-    # Capture frame-by-frame
     ret, frame = cap.read()
     if ret == True:
-        # Operations on the frame
-        v_frame = cv2.flip(frame, 1)
-        h_frame = cv2.flip(frame, 0)
+        # Text position
+        height = int(cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT))
+        position = (50, height - 50)
         
-        # Display
-        cv2.imshow("Original", frame)
-        cv2.imshow("Vertical flip", v_frame)
-        cv2.imshow("Horizontal flip", h_frame)
+        # Frames per second
+        fps = "{0:.2f}".format(cap.get(cv2.cv.CV_CAP_PROP_FPS))
+        text = "FPS: " + fps
+        
+        # Put text
+        cv2.putText(frame, text, position, font, font_scale, color, thickness)
 
+        # Display
+        cv2.imshow("Video", frame)
+        
         # Exit?
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

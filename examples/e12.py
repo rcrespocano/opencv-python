@@ -1,16 +1,32 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
 
-# Load
-image_path = 'images/rabbit.jpg'
-image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+webcam_id = 0
+cap = cv2.VideoCapture(webcam_id)
 
-# Histogram
-hist = cv2.calcHist([image], channels=[0], mask=None, histSize=[256], ranges=[0,256])
+# Cany edge detector thresholds
+threshold_one = 50
+threshold_two = 150
+aperture_size = 3
 
-# Plot
-plt.plot(hist)
-plt.xlim([0, 255])
-plt.show()
+while(cap.isOpened()):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    if ret == True:
+        # Operations on the frame
+        edges = cv2.Canny(frame, threshold_one, threshold_two, aperture_size)
+        
+        # Display
+        cv2.imshow("Original", frame)
+        cv2.imshow("Canny edge detection", edges)
+
+        # Exit?
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        break
+
+# Release everything if job is finished
+cap.release()
+cv2.destroyAllWindows()
 

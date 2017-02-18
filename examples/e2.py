@@ -1,26 +1,19 @@
-import numpy as np
 import cv2
+import numpy
+import os
 
-video_file = 'videos/roller-coaster.mp4'
-cap = cv2.VideoCapture(video_file)
+# Make an array of 120,000 random bytes.
+random_byte_array = bytearray(os.urandom(120000))
+flat_numpy_array = numpy.array(random_byte_array)
 
-while (cap.isOpened()):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
+# Convert the array to make a 400x300 grayscale image.
+gray_image = flat_numpy_array.reshape(300, 400)
+cv2.imshow('Random gray', gray_image)
 
-    if ret == True:
-        # Operations on the frame
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+# Convert the array to make a 400x100 color image.
+bgr_image = flat_numpy_array.reshape(100, 400, 3)
+cv2.imshow('Random color', bgr_image)
 
-        # Display the resulting frame
-        cv2.imshow('frame', gray)
-    
-        # Exit?
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    else:
-        break
-
-cap.release()
+cv2.waitKey(0)
 cv2.destroyAllWindows()
 

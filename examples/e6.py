@@ -1,16 +1,15 @@
 import cv2
+import numpy as np
 
-# Load image
-image_path = 'images/sunset.jpg'
-image = cv2.imread(image_path)
+image_file = 'images/rabbit.jpg'
+img = cv2.imread(image_file)
 
-# Blur
-k = 5
-blur = cv2.blur(image, (k, k))
+kernel = np.ones((3, 3), np.float32) / 9
+dst = cv2.filter2D(src=img, ddepth=-1, kernel=kernel)
 
 # Show
-cv2.imshow('Original', image)
-cv2.imshow('Filtered', blur)
+cv2.imshow('Original', img)
+cv2.imshow('Filtered', dst)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

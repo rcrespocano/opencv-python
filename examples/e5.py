@@ -1,15 +1,29 @@
-import cv2
 import numpy as np
+import cv2
 
-image_file = 'images/rabbit.jpg'
-img = cv2.imread(image_file)
+webcam_id = 0
+cap = cv2.VideoCapture(webcam_id)
 
-kernel = np.ones((3, 3), np.float32) / 9
-dst = cv2.filter2D(src=img, ddepth=-1, kernel=kernel)
+while(cap.isOpened()):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    if ret == True:
+        # Operations on the frame
+        v_frame = cv2.flip(frame, 1)
+        h_frame = cv2.flip(frame, 0)
+        
+        # Display
+        cv2.imshow("Original", frame)
+        cv2.imshow("Vertical flip", v_frame)
+        cv2.imshow("Horizontal flip", h_frame)
 
-# Show
-cv2.imshow('Original', img)
-cv2.imshow('Filtered', dst)
-cv2.waitKey(0)
+        # Exit?
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        break
+
+# Release everything if job is finished
+cap.release()
 cv2.destroyAllWindows()
 

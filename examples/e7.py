@@ -4,10 +4,9 @@ import cv2
 image_path = 'images/sunset.jpg'
 image = cv2.imread(image_path)
 
-# Gaussian blur
+# Blur
 k = 5
-sigma = 50
-blur = cv2.GaussianBlur(image, (k, k), sigma)
+blur = cv2.blur(image, (k, k))
 
 # Show
 cv2.imshow('Original', image)
