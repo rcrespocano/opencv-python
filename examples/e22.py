@@ -24,7 +24,7 @@ plt.scatter(newcomer[:,0], newcomer[:,1], 80, 'g', 'o')
 k = 5
 knn = cv2.KNearest()
 knn.train(trainData, responses)
-ret, results, neighbours ,dist = knn.find_nearest(newcomer, k)
+ret, results, neighbours, dist = knn.find_nearest(newcomer, k)
 
 print("result: " + str(results))
 print("neighbours: " + str(neighbours))
