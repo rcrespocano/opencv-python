@@ -80,7 +80,10 @@ img1 = cv2.imread('images/r2d2.jpg', 0)
 img2 = cv2.imread('images/starwars.jpg', 0)
 
 # Initiate ORB detector
-orb = cv2.ORB()
+if cv2.__version__.startswith('2.4'):
+    orb = cv2.ORB()
+else:
+    orb = cv2.ORB_create()
 
 # Find the keypoints and descriptors with ORB
 kp1, des1 = orb.detectAndCompute(img1,None)
