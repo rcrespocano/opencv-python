@@ -7,7 +7,10 @@ path = 'images/bratislava_castle.jpg'
 img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
 # Initiate ORB detector
-orb = cv2.ORB()
+if cv2.__version__.startswith('2.4'):
+    orb = cv2.ORB()
+else:
+    orb = cv2.ORB_create()
 
 # Find the keypoints and descriptors with ORB
 kp, des = orb.detectAndCompute(img, None)
