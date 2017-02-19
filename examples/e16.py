@@ -2,7 +2,7 @@ import cv2
 import sys
 
 # Load XML classifieres
-cas_path = 'haarcascade_frontalface_default.xml'
+cas_path = 'haarcascade/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(cas_path)
 
 # Webcam

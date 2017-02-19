@@ -2,8 +2,8 @@ import cv2
 import sys
 
 # Load XML classifieres
-cas_path = 'haarcascade_frontalface_default.xml'
-eye_path = 'haarcascade_eye.xml'
+cas_path = 'haarcascade/haarcascade_frontalface_default.xml'
+eye_path = 'haarcascade/haarcascade_eye.xml'
 face_cascade = cv2.CascadeClassifier(cas_path)
 eye_cascade = cv2.CascadeClassifier(eye_path)
 
