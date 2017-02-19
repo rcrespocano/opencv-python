@@ -22,9 +22,14 @@ plt.scatter(newcomer[:,0], newcomer[:,1], 80, 'g', 'o')
 
 # Classification
 k = 5
-knn = cv2.KNearest()
-knn.train(trainData, responses)
-ret, results, neighbours, dist = knn.find_nearest(newcomer, k)
+if cv2.__version__.startswith('2.4'):
+    knn = cv2.KNearest()
+    knn.train(trainData, responses)
+    ret, results, neighbours, dist = knn.find_nearest(newcomer, k)
+else:
+    knn = cv2.ml.KNearest_create()
+    knn.train(trainData, cv2.ml.ROW_SAMPLE, responses)
+    ret, results, neighbours, dist = knn.findNearest(newcomer, k)
 
 print("result: " + str(results))
 print("neighbours: " + str(neighbours))
