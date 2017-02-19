@@ -1,2 +1,5 @@
 # Install OpenCV
 conda install -c https://conda.binstar.org/menpo opencv
+
+# CAChemE installation instructions
+https://github.com/CAChemE/curso-opencv-python/blob/master/instalacion-opencv.md
