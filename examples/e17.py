@@ -11,6 +11,12 @@ eye_cascade = cv2.CascadeClassifier(eye_path)
 webcam_id = 0
 video_capture = cv2.VideoCapture(webcam_id)
 
+# Detect multi-scale flags
+if cv2.__version__.startswith('2.4'):
+    dmf_flag = cv2.cv.CV_HAAR_SCALE_IMAGE
+else:
+    dmf_flag = cv2.CASCADE_SCALE_IMAGE
+
 while True:
     # Capture frame-by-frame
     ret, frame = video_capture.read()
@@ -24,7 +30,7 @@ while True:
         scaleFactor=1.1,
         minNeighbors=5,
         minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+        flags=dmf_flag
     )
 
     # Draw a rectangle around the faces
