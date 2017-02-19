@@ -19,8 +19,11 @@ K = 2
 attempts = 10
 
 # Apply kmeans
-ret, label, center = cv2.kmeans(Z, K, criteria, attempts, cv2.KMEANS_RANDOM_CENTERS)
- 
+if cv2.__version__.startswith('2.4'):
+    ret, label, center = cv2.kmeans(Z, K, criteria, attempts, cv2.KMEANS_RANDOM_CENTERS)
+else:
+    ret, label, center = cv2.kmeans(Z, K, None, criteria, attempts, cv2.KMEANS_RANDOM_CENTERS)
+
 # Now separate the data, Note the flatten()
 A = Z[label.ravel() == 0]
 B = Z[label.ravel() == 1]
