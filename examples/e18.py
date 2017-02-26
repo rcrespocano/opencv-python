@@ -12,8 +12,8 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     # Define range in HSV
-    lower_color = np.array([85, 50, 50])
-    upper_color =  np.array([145, 255, 255])
+    lower_color = np.array([0, 70, 50])
+    upper_color =  np.array([10, 255, 255])
 
     # Mask: threshold the HSV image to get only defined colors
     mask = cv2.inRange(hsv, lower_color, upper_color)

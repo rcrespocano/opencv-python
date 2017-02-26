@@ -11,7 +11,7 @@ cv2.imshow('Image', image)
 cv2.waitKey(0)
 
 # Histogram
-hist = cv2.calcHist([image], channels=[0], mask=None, histSize=[256], ranges=[0,256])
+hist = cv2.calcHist([image], channels=[0], mask=None, histSize=[256], ranges=[0,255])
 
 # Plot
 plt.plot(hist)
